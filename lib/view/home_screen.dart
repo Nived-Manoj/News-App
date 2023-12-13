@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(),
         body: ListView.builder(
+          itemCount: 10,
           itemBuilder: (context, index) => Column(
             children: [
               Padding(
