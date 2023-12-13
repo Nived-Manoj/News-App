@@ -20,16 +20,6 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 280),
-                child: Text(
-                  "Author d cruzy",
-                  style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
-                ),
-              ),
               ListTile(
                 minVerticalPadding: 10,
                 title: Text(
@@ -45,6 +35,22 @@ class HomeScreen extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Author d cruzy",
+                    style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    "21/12/2017",
+                    style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                  ),
+                ],
               )
             ],
           ),
