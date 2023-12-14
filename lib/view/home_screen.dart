@@ -1,7 +1,35 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Map<String, dynamic> decodedData = {};
+  NewsModel? newsRes;
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future getData() async {
+    final url = Uri.parse(
+        "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=44fea6646644464582367918560f9e7e ");
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      decodedData = jsonDecode(response.body);
+      print(decodedData);
+      employResponse = NewsModel.fromJson(decodedData);
+      setState(() {});
+    } else {
+      print("error");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +43,12 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: 300,
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(30)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                  child: Image.network(
+                    newsRes?.articles?[index].urlToImage ?? " ",
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               ListTile(
