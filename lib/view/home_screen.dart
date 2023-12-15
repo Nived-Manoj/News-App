@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:newsapp/model/model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Map<String, dynamic> decodedData = {};
-  NewsModel? newsRes;
+  MyModel? newsRes;
   void initState() {
     getData();
     super.initState();
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       decodedData = jsonDecode(response.body);
       print(decodedData);
-      employResponse = NewsModel.fromJson(decodedData);
+      employResponse = MyModel.fromJson(decodedData);
       setState(() {});
     } else {
       print("error");
