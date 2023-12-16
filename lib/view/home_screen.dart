@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:newsapp/model/model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       decodedData = jsonDecode(response.body);
       print(decodedData);
-      employResponse = MyModel.fromJson(decodedData);
+      newsRes = MyModel.fromJson(decodedData);
       setState(() {});
     } else {
       print("error");
@@ -55,14 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 minVerticalPadding: 10,
                 title: Text(
-                  "TTTTTTTTTTTTTTTTTTTTTTTTTTFFFFFFFFFFFFFFFFFSSSSSSSSSSSSSSSSSKKKKKKKKKKKKKKKKL",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  newsRes?.articles?[index].title ?? "",
                 ),
                 subtitle: Text(
-                  "dgfhghsgfhgsafghsgfsdghgagjhshdddddddddddd,,,,,,JHJJJJJJJJJJJJJJJJJJJJJJJSDAAAAAAAAAAAAAAsddshadshdjgshghsjgjhsafjgsdafgshdfgsdhfghsfhajghdgfhdgshgAAAAAAHLGhggergfelfgdlfdshfjhgfahgdshjgfh",
+                  newsRes?.articles?[index].description ?? "",
                   style: TextStyle(
                     fontSize: 18,
                   ),
@@ -72,14 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    "Author d cruzy",
+                    newsRes?.articles?[index].author ?? "",
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                   ),
                   SizedBox(
                     width: 30,
                   ),
                   Text(
-                    "21/12/2017",
+                    newsRes?.articles?[index].publishedAt.toString() ?? "",
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                   ),
                 ],
