@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class MyModel {
   String? status;
   int? totalResults;
