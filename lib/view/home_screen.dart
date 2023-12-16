@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../controller/controller.dart';
 
@@ -10,19 +11,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final homeController = HomeController();
   void initState() {
     fetchData();
     super.initState();
   }
 
   Future<void> fetchData() async {
-    homeController.getData();
-    setState(() {});
+    Provider.of<HomeController>(context, listen: false).getData();
   }
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Provider.of<HomeController>(context);
     return Scaffold(
         appBar: AppBar(),
         body: ListView.builder(
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(30)),
                   child: Image.network(
-                    newsRes?.articles?[index].urlToImage ?? " ",
+                    homeController.newsRes?.articles?[index].urlToImage ?? " ",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -44,10 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ListTile(
                 minVerticalPadding: 10,
                 title: Text(
-                  newsRes?.articles?[index].title ?? "",
+                  homeController.newsRes?.articles?[index].title ?? "",
                 ),
                 subtitle: Text(
-                  newsRes?.articles?[index].description ?? "",
+                  homeController.newsRes?.articles?[index].description ?? "",
                   style: TextStyle(
                     fontSize: 18,
                   ),
@@ -57,14 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    newsRes?.articles?[index].author ?? "",
+                    homeController.newsRes?.articles?[index].author ?? "",
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                   ),
                   SizedBox(
                     width: 30,
                   ),
                   Text(
-                    newsRes?.articles?[index].publishedAt.toString() ?? "",
+                    homeController.newsRes?.articles?[index].publishedAt
+                            .toString() ??
+                        "",
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                   ),
                 ],

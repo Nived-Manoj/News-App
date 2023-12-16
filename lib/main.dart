@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/controller/controller.dart';
 import 'package:newsapp/view/home_screen.dart';
+import 'package:provider/provider.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -10,9 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => HomeController(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen(),
+      ),
     );
   }
 }
