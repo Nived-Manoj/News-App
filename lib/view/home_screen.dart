@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:newsapp/model/model.dart';
+
+import '../controller/controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,25 +10,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Map<String, dynamic> decodedData = {};
-  MyModel? newsRes;
+  final homeController = HomeController();
   void initState() {
-    getData();
+    fetchData();
     super.initState();
   }
 
-  Future getData() async {
-    final url = Uri.parse(
-        "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=44fea6646644464582367918560f9e7e ");
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      decodedData = jsonDecode(response.body);
-      print(decodedData);
-      newsRes = MyModel.fromJson(decodedData);
-      setState(() {});
-    } else {
-      print("error");
-    }
+  Future<void> fetchData() async {
+    homeController.getData();
+    setState(() {});
   }
 
   @override
