@@ -7,8 +7,11 @@ import '../model/model.dart';
 class HomeController with ChangeNotifier {
   Map<String, dynamic> decodedData = {};
   MyModel? newsRes;
+  bool isLoading = false;
 
   Future getData() async {
+    isLoading = true;
+    notifyListeners();
     final url = Uri.parse(
         "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=44fea6646644464582367918560f9e7e ");
     final response = await http.get(url);
@@ -19,6 +22,7 @@ class HomeController with ChangeNotifier {
     } else {
       print("error");
     }
+    isLoading = false;
     notifyListeners();
   }
 }
