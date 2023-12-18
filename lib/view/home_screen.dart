@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,10 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 300,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30)),
-                        child: Image.network(
-                          homeController.newsRes?.articles?[index].urlToImage ??
+                        child: CachedNetworkImage(
+                          imageUrl: homeController
+                                  .newsRes?.articles?[index].urlToImage ??
                               " ",
-                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),
