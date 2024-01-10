@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 16, fontStyle: FontStyle.italic),
                         ),
                         SizedBox(
-                          width: 30,
+                          width: 5,
                         ),
                         Text(
                           homeController.newsRes?.articles?[index].publishedAt
