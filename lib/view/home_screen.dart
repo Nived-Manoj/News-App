@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../controller/controller.dart';
@@ -28,8 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(),
         body: homeController.isLoading == true
             ? Center(
-                child: CircularProgressIndicator(),
-              )
+                child: Lottie.asset("assets/Animation 1.json", height: 300))
             : ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) => Column(
@@ -44,8 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           imageUrl: homeController
                                   .newsRes?.articles?[index].urlToImage ??
                               " ",
-                          placeholder: (context, url) =>
-                              Center(child: CircularProgressIndicator()),
+                          placeholder: (context, url) => Center(
+                              child: Lottie.asset("assets/Animation.json",
+                                  height: 120)),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
